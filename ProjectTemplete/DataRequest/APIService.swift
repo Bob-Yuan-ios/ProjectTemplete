@@ -24,7 +24,7 @@ class APIService {
 
     func fetchTodo(id: Int) -> Observable<String> {
           
-        return provider.rx.request(.getTodo(id: 1))
+        return provider.rx.request(.getTodo(id: id))
             .map { response -> String in
                 return String(data: response.data, encoding: .utf8) ?? "Invalid Data"
             }
