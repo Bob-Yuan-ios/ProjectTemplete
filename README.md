@@ -1,4 +1,3 @@
 # ProjectTemplete
 
-## 架构图
-MVVM + Coordinator
+## 框架 MVVM + Coordinator
