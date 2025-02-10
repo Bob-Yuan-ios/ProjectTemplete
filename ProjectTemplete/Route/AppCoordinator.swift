@@ -36,7 +36,7 @@ class AppCoordinator: Coordinator{
         mainCoordinator.start()
     }
     
-    private func showAuthFlow(){
+    func showAuthFlow(){
         let authCoordinator = AuthCoordinator(navigationController: navigationController, parent: self)
         childCoordinators.append(authCoordinator)
         authCoordinator.start()

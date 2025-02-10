@@ -23,7 +23,10 @@ class MainCoordinator: Coordinator{
     }
     
     func navigateToDetail(){
-        let detailVC = DetailViewController()
-        navigationController.pushViewController(detailVC, animated: true)
+        print("清空登录信息...")
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        
+        parent?.removeCoordinator(self)
+        parent?.showAuthFlow()
     }
 }
