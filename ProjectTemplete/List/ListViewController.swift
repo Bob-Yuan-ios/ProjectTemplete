@@ -85,5 +85,12 @@ class ListViewController: UIViewController {
         
         
         tableView.mj_header?.beginRefreshing()
+        
+        
+        tableView.rx.modelSelected(CellModel.self)
+            .subscribe(onNext: { [weak self] model in
+                self?.coordinator?.navigationDetail(model: model)
+            })
+            .disposed(by: disposeBag)
     }
 }

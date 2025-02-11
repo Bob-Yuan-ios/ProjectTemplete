@@ -22,5 +22,10 @@ class ListCoordinator: Coordinator {
         navigationController.setViewControllers([listVC], animated: true)
     }
     
+    func navigationDetail(model: CellModel) {
 
+        let detailVC = ListDetailViewController()
+        detailVC.model = model
+        navigationController.pushViewController(detailVC, animated: true)
+    }
 }
