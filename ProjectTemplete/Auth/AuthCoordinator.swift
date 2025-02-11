@@ -22,12 +22,12 @@ class AuthCoordinator: Coordinator{
         navigationController.pushViewController(loginVC, animated: true)
     }
     
-    func didFinishAuth(){
+    func didFinishAuth() {
         parent?.removeCoordinator(self)
         parent?.showMainFlow()
     }
     
-    func didList(){
+    func didList() {
         parent?.removeCoordinator(self)
         parent?.showListFlow()
     }

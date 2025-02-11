@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppCoordinator: Coordinator{
+class AppCoordinator: Coordinator {
     var window: UIWindow
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
@@ -31,19 +31,19 @@ class AppCoordinator: Coordinator{
     }
 
     
-    func showMainFlow(){
+    func showMainFlow() {
         let mainCoordinator = MainCoordinator(navigationController: navigationController, parent: self)
         childCoordinators.append(mainCoordinator)
         mainCoordinator.start()
     }
     
-    func showAuthFlow(){
+    func showAuthFlow() {
         let authCoordinator = AuthCoordinator(navigationController: navigationController, parent: self)
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
     
-    func showListFlow(){
+    func showListFlow() {
         let listCoordinator = ListCoordinator(navigationController: navigationController, parent: self)
         childCoordinators.append(listCoordinator)
         listCoordinator.start()

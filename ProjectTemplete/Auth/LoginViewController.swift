@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController {
     
     weak var coordinator: AuthCoordinator?
     

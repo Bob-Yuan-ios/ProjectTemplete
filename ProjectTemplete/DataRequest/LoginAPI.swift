@@ -12,7 +12,7 @@ class LoginAPI {
     static func login(username: String, password: String) -> Observable<Bool> {
         return Observable.create{ observer in
             DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                if username == "admin" && password == "123456"{
+                if username == "admin" && password == "123456" {
                     observer.onNext(true)
                 }else {
                     observer.onNext(false)

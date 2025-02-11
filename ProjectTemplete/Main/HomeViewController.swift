@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    @objc func didTapNext(){
+    @objc func didTapNext() {
         coordinator?.navigateToDetail()
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainCoordinator: Coordinator{
+class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
     weak var parent: AppCoordinator?
     
