@@ -14,16 +14,15 @@ class LoginViewModel {
     let username = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
     let loginTap = PublishSubject<Void>()
+    let loginResult = PublishSubject<Bool>()
     
+    private let disposeBag = DisposeBag()
+
     var isLoginEnabled: Observable<Bool> {
         return Observable.combineLatest(username, password)
             .map{ !$0.isEmpty && !$1.isEmpty}
             .distinctUntilChanged()
-    }
-    
-    let loginResult = PublishSubject<Bool>()
-    
-    private let disposeBag = DisposeBag()
+    }    
     
     init() {
         loginTap
