@@ -13,7 +13,6 @@ import SnapKit
 class LoginViewController: UIViewController {
     
     weak var coordinator: AuthCoordinator?
-    
     private let disposeBag = DisposeBag()
     private let viewModel = LoginViewModel()
     
@@ -57,7 +56,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .darkGray
         
         view.addSubview(usernameTextField)
         view.addSubview(passwordTextField)

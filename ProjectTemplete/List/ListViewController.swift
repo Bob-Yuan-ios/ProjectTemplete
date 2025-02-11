@@ -13,9 +13,9 @@ import MJRefresh
 
 class ListViewController: UIViewController {
 
+    weak var coordinator: ListCoordinator?
     private let viewModel = ListViewModel()
     private let disposeBag = DisposeBag()
-    weak var coordinator: ListCoordinator?
 
     private lazy var tableView: UITableView = {
         let tempTableView = UITableView()
@@ -40,7 +40,6 @@ class ListViewController: UIViewController {
         
         setupUI()
         setupBindings()
-        
     }
 
     private func setupUI() {

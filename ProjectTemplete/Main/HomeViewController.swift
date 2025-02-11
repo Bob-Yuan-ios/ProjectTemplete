@@ -10,13 +10,25 @@ import RxSwift
 import RxCocoa
 
 class HomeViewController: UIViewController {
+    
+    weak var coordinator: MainCoordinator?
     private let viewModel = HomeViewModel()
     private let disposeBag = DisposeBag()
     
-    let label = UILabel()
-    let button = UIButton(type: .system)
-
-    weak var coordinator: MainCoordinator?
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.text = "Click to Load Data"
+        label.numberOfLines = 0
+        label.frame = CGRect(x: 50, y: 200, width: 300, height: 150)
+        return label
+    }()
+    
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("Fetch Data", for: .normal)
+        button.frame = CGRect(x: 100, y: 380, width: 200, height: 50)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +39,8 @@ class HomeViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        label.text = "Click to Load Data"
-        label.numberOfLines = 0
-        label.frame = CGRect(x: 50, y: 200, width: 300, height: 150)
-        view.addSubview(label)
         
-        button.setTitle("Fetch Data", for: .normal)
-        button.frame = CGRect(x: 100, y: 380, width: 200, height: 50)
+        view.addSubview(label)
         view.addSubview(button)
     }
         

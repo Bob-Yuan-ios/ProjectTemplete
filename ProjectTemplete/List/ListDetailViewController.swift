@@ -22,7 +22,6 @@ class ListDetailViewController: UIViewController {
         return label
     }()
     
-    
     private lazy var descLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
