@@ -23,7 +23,8 @@ class AppCoordinator: Coordinator{
         window.makeKeyAndVisible()
         
         if isUserLoggedIn() {
-            showMainFlow()
+//            showMainFlow()
+            showListFlow()
         }else{
             showAuthFlow()
         }
@@ -42,6 +43,11 @@ class AppCoordinator: Coordinator{
         authCoordinator.start()
     }
     
+    func showListFlow(){
+        let listCoordinator = ListCoordinator(navigationController: navigationController, parent: self)
+        childCoordinators.append(listCoordinator)
+        listCoordinator.start()
+    }
     
     private func isUserLoggedIn() -> Bool {
         return  UserDefaults.standard.bool(forKey: "isLoggedIn")

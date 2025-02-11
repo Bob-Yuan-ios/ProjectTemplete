@@ -26,4 +26,9 @@ class AuthCoordinator: Coordinator{
         parent?.removeCoordinator(self)
         parent?.showMainFlow()
     }
+    
+    func didList(){
+        parent?.removeCoordinator(self)
+        parent?.showListFlow()
+    }
 }

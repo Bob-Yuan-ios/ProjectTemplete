@@ -130,7 +130,7 @@ class LoginViewController: UIViewController{
         print("保存登录信息...")
         
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-        coordinator?.didFinishAuth()
+        coordinator?.didList()
     }
     
     private func showLoginError() {
