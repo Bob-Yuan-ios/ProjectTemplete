@@ -55,12 +55,14 @@ class ListViewController: UIViewController {
     
     private func setupBindings() {
         
+        // 数据回显到表单
         viewModel.items
             .bind(to: tableView.rx.items(cellIdentifier: "ListCell", cellType: ListCell.self)){ _, model, cell in
                 cell.configure(with: model)
             }
             .disposed(by: disposeBag)
         
+        // 下拉刷新状态
         viewModel.isRefreshing
             .bind(onNext: { [weak self] isRefreshing in
                 if !isRefreshing {
@@ -69,6 +71,7 @@ class ListViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        // 上拉加载状态
         viewModel.isLoadingMore
             .bind(onNext: { [weak self] isLoadingMore in
                 if !isLoadingMore {
@@ -77,20 +80,20 @@ class ListViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        // 数据全部请求完
         viewModel.hasMoreData
             .subscribe(onNext: { [weak self] hasMore in
                 self?.tableView.mj_footer?.isHidden = !hasMore
             })
             .disposed(by: disposeBag)
-        
-        
-        tableView.mj_header?.beginRefreshing()
-        
-        
+
+        // 选择表单某一行
         tableView.rx.modelSelected(CellModel.self)
             .subscribe(onNext: { [weak self] model in
                 self?.coordinator?.navigationDetail(model: model)
             })
             .disposed(by: disposeBag)
+        
+        tableView.mj_header?.beginRefreshing()
     }
 }
