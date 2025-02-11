@@ -15,7 +15,7 @@ class ListViewModel {
     let refreshTrigger = PublishSubject<Void>()
     let loadMoreTrigger = PublishSubject<Void>()
     
-    let items = BehaviorRelay<[Item]>(value: [])
+    let items = BehaviorRelay<[CellModel]>(value: [])
     let isRefreshing = BehaviorRelay<Bool>(value: false)
     let isLoadingMore = BehaviorRelay<Bool>(value: false)
     let hasMoreData = BehaviorRelay<Bool>(value: false)
@@ -26,7 +26,7 @@ class ListViewModel {
 
     init() {
         refreshTrigger
-            .flatMapLatest{ [weak self] _ -> Observable<[Item]> in
+            .flatMapLatest{ [weak self] _ -> Observable<[CellModel]> in
                 guard let self = self else { return Observable.just([])}
                 
                 self.isRefreshing.accept(true)
@@ -49,7 +49,7 @@ class ListViewModel {
                 guard let self = self else { return false}
                 return !self.isLoadingMore.value && self.hasMoreData.value
             }
-            .flatMapLatest{ [weak self] _ -> Observable<[Item]> in
+            .flatMapLatest{ [weak self] _ -> Observable<[CellModel]> in
                 guard let self = self else { return Observable.just([])}
                 
                 self.isLoadingMore.accept(true)

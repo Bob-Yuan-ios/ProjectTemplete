@@ -6,7 +6,7 @@
 //
 
 
-struct Item {
-    let id: Int
+struct CellModel {
     let title: String
+    let description: String
 }

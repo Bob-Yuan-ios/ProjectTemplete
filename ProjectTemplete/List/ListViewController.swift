@@ -19,7 +19,7 @@ class ListViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         let tempTableView = UITableView()
-        tempTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tempTableView.register(ListCell.self, forCellReuseIdentifier: "ListCell")
         tempTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self?.viewModel.refreshTrigger.onNext(())
         })
@@ -29,6 +29,8 @@ class ListViewController: UIViewController {
             self?.viewModel.loadMoreTrigger.onNext(())
         })
         
+        tempTableView.estimatedRowHeight = 100
+        tempTableView.rowHeight = UITableView.automaticDimension
         
         return tempTableView
     }()
@@ -54,8 +56,8 @@ class ListViewController: UIViewController {
     private func setupBindings() {
         
         viewModel.items
-            .bind(to: tableView.rx.items(cellIdentifier: "Cell")) { _, item, cell in
-                cell.textLabel?.text = item.title
+            .bind(to: tableView.rx.items(cellIdentifier: "ListCell", cellType: ListCell.self)){ _, model, cell in
+                cell.configure(with: model)
             }
             .disposed(by: disposeBag)
         
