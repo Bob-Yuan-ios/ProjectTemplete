@@ -13,6 +13,8 @@ import RxSwift
 class ListDetailViewController: UIViewController {
 
     var model: CellModel?
+    let disposeBag = DisposeBag()
+    let viewModel = ListDetailViewModel()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -36,6 +38,13 @@ class ListDetailViewController: UIViewController {
      
         setupUI()
         configureData()
+        bindViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.fetchData()
     }
     
     private func setupUI() {
@@ -58,5 +67,18 @@ class ListDetailViewController: UIViewController {
     private func configureData() {
         titleLabel.text = model?.title
         descLabel.text = model?.description
+    }
+    
+    private func updateWithAppendData(message: String) {
+        let string = message + descLabel.text!
+        descLabel.text = string
+    }
+    
+    private func bindViewModel() {
+        viewModel.combineData
+            .bind(onNext: { [weak self] message in
+                self?.updateWithAppendData(message: message)
+            })
+            .disposed(by: disposeBag)
     }
 }
