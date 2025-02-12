@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  MainViewModel.swift
 //  ProjectTemplete
 //
 //  Created by Bob on 2025/2/8.
@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-class HomeViewModel{
+class MainViewModel{
     
     private let apiService = APIService.shared
     private let disposeBag = DisposeBag()

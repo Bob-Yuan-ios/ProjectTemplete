@@ -17,18 +17,12 @@ class AuthCoordinator: Coordinator{
     }
     
     func start() {
-        let loginVC = LoginViewController()
+        let loginVC = AuthViewController()
         loginVC.coordinator = self
         navigationController.pushViewController(loginVC, animated: true)
     }
     
     func didFinishAuth() {
-        parent?.removeCoordinator(self)
         parent?.showMainFlow()
-    }
-    
-    func didList() {
-        parent?.removeCoordinator(self)
-        parent?.showListFlow()
     }
 }

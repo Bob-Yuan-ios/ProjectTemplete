@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  MainViewController.swift
 //  ProjectTemplete
 //
 //  Created by Bob on 2025/2/8.
@@ -9,10 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: UIViewController {
+class MainViewController: UIViewController {
     
-    weak var coordinator: MainCoordinator?
-    private let viewModel = HomeViewModel()
+    var coordinator: MainCoordinator?
+    private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
     
     private lazy var label: UILabel = {

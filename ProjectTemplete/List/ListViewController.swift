@@ -13,7 +13,7 @@ import MJRefresh
 
 class ListViewController: UIViewController {
 
-    weak var coordinator: ListCoordinator?
+    var coordinator: ListCoordinator?
     private let viewModel = ListViewModel()
     private let disposeBag = DisposeBag()
 

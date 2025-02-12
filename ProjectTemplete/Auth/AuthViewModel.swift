@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  AuthViewModel.swift
 //  ProjectTemplete
 //
 //  Created by Bob on 2025/2/10.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class LoginViewModel {
+class AuthViewModel {
     
     let username = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
@@ -28,7 +28,7 @@ class LoginViewModel {
         loginTap
             .withLatestFrom(Observable.combineLatest(username, password))
             .flatMapLatest{ (username, password) in
-                return LoginAPI.login(username: username, password: password)
+                return AuthAPI.login(username: username, password: password)
                         .catchAndReturn(false)
             }
             .bind(to: loginResult)

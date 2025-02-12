@@ -9,24 +9,25 @@ import UIKit
 
 class MainCoordinator: Coordinator {
     var navigationController: UINavigationController
-    weak var parent: AppCoordinator?
-    
-    init(navigationController: UINavigationController, parent: AppCoordinator? = nil) {
-        self.navigationController = navigationController
-        self.parent = parent
+
+    init() {
+        self.navigationController = UINavigationController()
+        
+        self.navigationController.tabBarItem = UITabBarItem(
+           title: "设置",                             // 设置 Tab 标题
+           image: UIImage(systemName: "gear"),        // 设置 Tab 图标
+           selectedImage: UIImage(systemName: "gear.fill")  // 设置选中的图标
+       )
     }
     
     func start() {
-        let homeVC = HomeViewController()
+        let homeVC = MainViewController()
         homeVC.coordinator = self
-        navigationController.setViewControllers([homeVC], animated: true)
+        navigationController.viewControllers = [homeVC]
     }
     
     func navigateToDetail(){
         print("清空登录信息...")
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
-        
-        parent?.removeCoordinator(self)
-        parent?.showAuthFlow()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  AuthViewController.swift
 //  ProjectTemplete
 //
 //  Created by Bob on 2025/2/8.
@@ -10,11 +10,11 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class LoginViewController: UIViewController {
+class AuthViewController: UIViewController {
     
-    weak var coordinator: AuthCoordinator?
+    var coordinator: AuthCoordinator?
     private let disposeBag = DisposeBag()
-    private let viewModel = LoginViewModel()
+    private let viewModel = AuthViewModel()
     
     private lazy var usernameTextField: UITextField = {
         let textField = UITextField()
@@ -129,7 +129,7 @@ class LoginViewController: UIViewController {
         print("保存登录信息...")
         
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-        coordinator?.didList()
+        coordinator?.parent?.showMainFlow()
     }
     
     private func showLoginError() {

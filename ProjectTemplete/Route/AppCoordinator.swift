@@ -11,50 +11,57 @@ import UIKit
 class AppCoordinator: Coordinator {
     var window: UIWindow
     var navigationController: UINavigationController
-    var childCoordinators: [Coordinator] = []
-    
+
     init(window: UIWindow) {
         self.window = window
         self.navigationController = UINavigationController()
     }
     
     func start() {
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
         
         if isUserLoggedIn() {
-//            showMainFlow()
-            showListFlow()
+            print("showMain...")
+            showMainFlow()
         }else{
+            print("showAuth...")
             showAuthFlow()
         }
     }
 
     
     func showMainFlow() {
-        let mainCoordinator = MainCoordinator(navigationController: navigationController, parent: self)
-        childCoordinators.append(mainCoordinator)
+        
+        let tabBarController = MainTabBarController()
+        
+        let listCoordinator = ListCoordinator()
+        let mainCoordinator = MainCoordinator()
+        
+        tabBarController.viewControllers = [
+            listCoordinator.navigationController,
+            mainCoordinator.navigationController
+        ]
+        
+        listCoordinator.start()
         mainCoordinator.start()
+        
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
     }
     
     func showAuthFlow() {
         let authCoordinator = AuthCoordinator(navigationController: navigationController, parent: self)
-        childCoordinators.append(authCoordinator)
         authCoordinator.start()
+        
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
     
     func showListFlow() {
-        let listCoordinator = ListCoordinator(navigationController: navigationController, parent: self)
-        childCoordinators.append(listCoordinator)
+        let listCoordinator = ListCoordinator()
         listCoordinator.start()
     }
     
     private func isUserLoggedIn() -> Bool {
         return  UserDefaults.standard.bool(forKey: "isLoggedIn")
-    }
-    
-    
-    func removeCoordinator(_ coordinator: Coordinator) {
-        childCoordinators.removeAll { $0 === coordinator }
     }
 }

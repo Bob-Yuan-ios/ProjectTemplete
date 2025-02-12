@@ -1,5 +1,5 @@
 //
-//  LoginAPI.swift
+//  AuthAPI.swift
 //  ProjectTemplete
 //
 //  Created by Bob on 2025/2/10.
@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class LoginAPI {
+class AuthAPI {
     static func login(username: String, password: String) -> Observable<Bool> {
         return Observable.create{ observer in
             DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
