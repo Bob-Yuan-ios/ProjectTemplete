@@ -56,11 +56,6 @@ class AppCoordinator: Coordinator {
         window.makeKeyAndVisible()
     }
     
-    func showListFlow() {
-        let listCoordinator = ListCoordinator()
-        listCoordinator.start()
-    }
-    
     private func isUserLoggedIn() -> Bool {
         return  UserDefaults.standard.bool(forKey: "isLoggedIn")
     }
