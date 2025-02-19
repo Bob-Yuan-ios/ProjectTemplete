@@ -14,7 +14,7 @@ class ListCoordinator: Coordinator {
         self.navigationController = UINavigationController()
         
         self.navigationController.tabBarItem = UITabBarItem(
-           title: "首页",                             // 设置 Tab 标题
+           title: "列表",                             // 设置 Tab 标题
            image: UIImage(systemName: "house"),      // 设置 Tab 图标（需要 SF Symbols 或自定义图片）
            selectedImage: UIImage(systemName: "house.fill")  // 设置选中的图标（可选）
        )

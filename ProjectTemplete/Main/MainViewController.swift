@@ -39,7 +39,8 @@ class MainViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        
+        self.title = "设置"
+
         view.addSubview(label)
         view.addSubview(button)
     }

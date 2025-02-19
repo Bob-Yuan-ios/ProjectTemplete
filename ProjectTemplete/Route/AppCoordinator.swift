@@ -35,12 +35,15 @@ class AppCoordinator: Coordinator {
         
         let listCoordinator = ListCoordinator()
         let mainCoordinator = MainCoordinator()
+        let chartCoordinator = ChartCoordinator()
         
         tabBarController.viewControllers = [
+            chartCoordinator.navigationController,
             listCoordinator.navigationController,
             mainCoordinator.navigationController
         ]
         
+        chartCoordinator.start()
         listCoordinator.start()
         mainCoordinator.start()
         

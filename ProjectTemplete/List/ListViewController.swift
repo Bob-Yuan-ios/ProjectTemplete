@@ -44,6 +44,8 @@ class ListViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = .white
+        self.title = "列表"
+
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints{ make in           
