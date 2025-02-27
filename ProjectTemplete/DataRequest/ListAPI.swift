@@ -22,7 +22,7 @@ class ListAPIService {
     
     static func requestAPI1() -> Observable<String> {
         return Observable.create{ observer in
-            DispatchQueue.global().asyncAfter(deadline: .now() + 2){
+            DispatchQueue.global().asyncAfter(deadline: .now() + 1){
                 observer.onNext("数据 1")
                 observer.onCompleted()
             }
@@ -32,7 +32,7 @@ class ListAPIService {
     
     static func requestAPI2() -> Observable<String> {
         return Observable.create{ observer in
-            DispatchQueue.global().asyncAfter(deadline: .now() + 3){
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5){
                 observer.onNext("数据 2")
                 observer.onCompleted()
             }

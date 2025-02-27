@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Foundation
 
 class MainViewController: UIViewController {
     
@@ -19,14 +20,13 @@ class MainViewController: UIViewController {
         let label = UILabel()
         label.text = "Click to Load Data"
         label.numberOfLines = 0
-        label.frame = CGRect(x: 50, y: 200, width: 300, height: 150)
         return label
     }()
     
     private lazy var button: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("Fetch Data", for: .normal)
-        button.frame = CGRect(x: 100, y: 380, width: 200, height: 50)
+        button.backgroundColor = .lightGray
         return button
     }()
     
@@ -35,14 +35,48 @@ class MainViewController: UIViewController {
       
         setupUI()
         bindViewModel()
+        
+        getNTPTime()
+
+    }
+    
+    // ntp协议获取网络时间
+    private func getNTPTime() {
+        
+        DispatchQueue.global().async {
+            let url = URL(string: "http://quan.suning.com/getSysTime.do")!
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print("请求失败: \(error.localizedDescription)")
+                    return
+                }
+                guard let data = data else { return }
+                
+                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let sysTime = json["sysTime2"] as? String {
+                    print("当前网络时间: \(sysTime)")
+                }
+            }
+            task.resume()
+        }
+       
     }
     
     private func setupUI() {
         view.backgroundColor = .white
-        self.title = "设置"
 
         view.addSubview(label)
         view.addSubview(button)
+        
+        label.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(44)
+            make.left.right.equalToSuperview().inset(16)
+        }
+        
+        button.snp.makeConstraints { make in
+            make.top.equalTo(label.snp_bottomMargin).offset(10)
+            make.left.right.equalToSuperview().inset(16)
+        }
     }
         
     private func bindViewModel() {

@@ -20,10 +20,8 @@ class AppCoordinator: Coordinator {
     func start() {
         
         if isUserLoggedIn() {
-            print("showMain...")
             showMainFlow()
         }else{
-            print("showAuth...")
             showAuthFlow()
         }
     }
