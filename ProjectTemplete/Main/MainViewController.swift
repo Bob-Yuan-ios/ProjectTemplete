@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Foundation
 
+
 class MainViewController: UIViewController {
     
     var coordinator: MainCoordinator?
@@ -36,30 +37,14 @@ class MainViewController: UIViewController {
         setupUI()
         bindViewModel()
         
-        getNTPTime()
-
-    }
-    
-    // ntp协议获取网络时间
-    private func getNTPTime() {
-        
-        DispatchQueue.global().async {
-            let url = URL(string: "http://quan.suning.com/getSysTime.do")!
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    print("请求失败: \(error.localizedDescription)")
-                    return
-                }
-                guard let data = data else { return }
-                
-                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let sysTime = json["sysTime2"] as? String {
-                    print("当前网络时间: \(sysTime)")
-                }
+        // 调用函数; 测试获取服务器时间
+        viewModel.getNetworkTime { date in
+            if let ntpDate = date {
+                print("NTP 时间: \(ntpDate)")
+            } else {
+                print("获取 NTP 时间失败")
             }
-            task.resume()
         }
-       
     }
     
     private func setupUI() {
@@ -78,7 +63,7 @@ class MainViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
     }
-        
+    
     private func bindViewModel() {
         button.rx.tap
             .bind { [weak self] in
